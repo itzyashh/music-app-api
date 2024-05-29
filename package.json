@@ -1,0 +1,18 @@
+{
+  "name": "music-app-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A simple music app api",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "main": "index.js",
+  "author": "yashh",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.19.2",
+    "nocopyrightsounds-api": "^3.0.2",
+    "nodemon": "^3.1.1"
+  }
+}
