@@ -1,6 +1,7 @@
 import express from 'express';
-import ncs from 'nocopyrightsounds-api'
 import route from './src/routes/index.js'
+import './src/db/index.js'
+
 const port = 5000
 const app = express();
 
