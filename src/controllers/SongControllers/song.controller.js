@@ -1,7 +1,12 @@
+import ncs from 'nocopyrightsounds-api';
 const getAllSongs = async (req, res) => {
-    const songs = await ncs.getSongs(/* page here */)
-    const page = req.query.page || 1
+    const page = req.query.page || null
+    const songs = await ncs.getSongs(page)
     // use the songs here
     console.log(songs)
     res.send(songs)
+}
+
+export {
+    getAllSongs
 }

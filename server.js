@@ -1,14 +1,14 @@
 import express from 'express';
 import ncs from 'nocopyrightsounds-api'
-
+import route from './src/routes/index.js'
 const port = 5000
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-    })
 
 
+app.use(express.json());
+
+app.use('/', route);
 
 
 app.listen(port, () => {
