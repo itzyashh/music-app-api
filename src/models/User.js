@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import Song from "./Song.js"; 
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    favorites:[Song.schema]
 });
 
 const User = mongoose.model("User", userSchema);

@@ -1,5 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import User from '../../models/User.js';
 
 
@@ -9,8 +10,14 @@ const createUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const user = new User({...req.body, password: hashedPassword})
         await user.save();
-        res.status(201).send(user);
+
+        const token = jwt.sign({ user: user._id }, process.env.JWT_SECRET,{expiresIn: '24h'});
+
+        res.status(201).json({ user, token });
+
+
     } catch (error) {
+        console.log(error);
         // duplication error
         if (error.code === 11000) {
             return res.status(400).send('This email is already in use');
@@ -32,7 +39,12 @@ const login = async (req, res) => {
             return res.status(400).send('Invalid credentials');
         }
 
-        res.send('Logged in');
+        const token = jwt.sign({ user: user._id }, process.env.JWT_SECRET,{expiresIn: '24h'});
+
+        // exclude password from user object
+        user.password = undefined;
+
+        res.json({ user, token });
     }
     catch (error) {
         res.status(500).send(error);
