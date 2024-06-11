@@ -4,7 +4,8 @@
   "type": "module",
   "description": "A simple music app api",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "main": "index.js",
   "author": "yashh",
