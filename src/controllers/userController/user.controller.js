@@ -13,7 +13,10 @@ const createUser = async (req, res) => {
 
         const token = jwt.sign({ user: user._id }, process.env.JWT_SECRET,{expiresIn: '24h'});
 
-        res.status(201).json({ user, token });
+        // exclude password from user object
+        user.password = undefined;
+
+        res.status(201).json({ userDetails:user, token });
 
 
     } catch (error) {
@@ -44,10 +47,11 @@ const login = async (req, res) => {
         // exclude password from user object
         user.password = undefined;
 
-        res.json({ user, token });
+        res.status(200).json({ userDetails:user, token });
     }
     catch (error) {
         res.status(500).send(error);
+        console.log('error at login',error)
     }
 }
 
